@@ -1,0 +1,23 @@
+{
+    "name": "nicl/silex-autolink",
+    "description": "Simple Twig extension for Silex to add autolink filter",
+    "homepage": "http://github.com/nicl/silex-autolink",
+    "authors": [
+        {
+            "name": "Nicolas Long",
+            "email": "nicolaslong@gmail.com"
+        }
+    ],
+    "require": {
+        "silex/silex": "1.0.*@dev",
+        "twig/twig": ">=1.8,<2.0-dev",
+    },
+    "autoload": {
+        "psr-0": { "Nicl": "src/" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
