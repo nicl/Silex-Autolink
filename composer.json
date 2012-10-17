@@ -2,6 +2,7 @@
     "name": "nicl/silex-autolink",
     "description": "Simple Twig extension for Silex to add autolink filter",
     "homepage": "http://github.com/nicl/silex-autolink",
+    "license": "MIT",
     "authors": [
         {
             "name": "Nicolas Long",
