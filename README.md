@@ -3,6 +3,8 @@ Silex-Autolink
 
 A lightweight service provider for Silex which adds an autolink Twig extension.
 
+*This extension is currently in development! The main autolink class is not written yet and the tests are wrong. YOU HAVE BEEN WARNED.*
+
 Installation
 ------------
 
