@@ -12,7 +12,7 @@ class Autolink
     /**
      * Permissive match if begins with protocal
      */
-    const PROTOCAL = '(ftp|https?)://[-\pL]+(\.\pL[-\pL]*)+';
+    const PROTOCAL = '((ftp|https?)://[-\pL]+(\.\pL[-\pL]*)+)';
 
     /**
      * Match when protocal missing
@@ -20,7 +20,7 @@ class Autolink
      * Wikipedia helpfully lists available top-level domains.
      * @link http://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
      */
-    const NO_PROTOCAL = '([\pL] ([-\pL]*)? \. )+
+    const NO_PROTOCAL = '(([\pL]+ \. )+
         ( aero\b
         | asia\b
         | biz\b
@@ -43,21 +43,17 @@ class Autolink
         | travel\b
         | xxx\b
         | [a-z][a-z]\b
-        )';
+        ))';
+
+    /**
+     * Definition of (optional) port
+     */
+    const PORT = '(:\d+)?';
 
     /**
      * Permissive definition of path
      */
-    const PATH = '((/[\pL]*)*)?';
-
-    const PORT = '(:\d+)?';
-
-    /**
-     * Valid end characters for a URI
-     *
-     * A notable omission here are parens (to avoid complications).
-     */
-    const END = '[a-z0-9_&=#\\/]';
+    const PATH = '(((/[\pL.]*)*)?[a-z0-9_&=#\\/])?';
 
     /**
      * @var string
@@ -72,9 +68,8 @@ class Autolink
                           . self::PROTOCAL
                           . '|' . self::NO_PROTOCAL
                           . ')'
-                          . PORT
-                          . PATH
-                          . END;
+                          . self::PORT
+                          . self::PATH;
     }
 
     /**
@@ -86,10 +81,12 @@ class Autolink
      */
     public function autolink($txt)
     {
-        $pattern = '#' . $this->validURL . '#';
-        preg_match($pattern, $txt, $matches);
-        var_dump($matches); exit();
+        $pattern = '!' . $this->validURL . '!x';
+        $replacement = '<a href="$0">$0</a>';
+        //var_dump($pattern); exit();
+        //preg_match($pattern, $txt, $matches);
+        //var_dump($matches); exit();
 
-        //return preg_replace($pattern, $replacement, $txt);
+        return preg_replace($pattern, $replacement, $txt);
     }
 }
