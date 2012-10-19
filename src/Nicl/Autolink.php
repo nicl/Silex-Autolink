@@ -5,14 +5,14 @@ namespace Nicl;
 /**
  * Autolink class
  *
- * Identifying URIs within a string is actually quite difficult.
+ * Identifying URLs within a string is actually quite difficult.
  */
 class Autolink
 {
     /**
      * Permissive match if begins with protocal
      */
-    const PROTOCAL = '((ftp|https?)://[-\pL]+(\.\pL[-\pL]*)+)';
+    const PROTOCAL = '((ftp|https?)://[-\p{L}\p{N}]+(\.[\p{L}\p{N}_][-\p{L}\p{N}_]*)+)';
 
     /**
      * Match when protocal missing
@@ -20,7 +20,7 @@ class Autolink
      * Wikipedia helpfully lists available top-level domains.
      * @link http://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
      */
-    const NO_PROTOCAL = '(([\pL]+ \. )+
+    const NO_PROTOCAL = '(([\p{L}\p{N}]+ \. )+
         ( aero\b
         | asia\b
         | biz\b
@@ -51,9 +51,12 @@ class Autolink
     const PORT = '(:\d+)?';
 
     /**
-     * Permissive definition of path
+     * Pragmatic definition of path
+     *
+     * Note, the whitelist for ending characters which excludes several valid
+     * characters.
      */
-    const PATH = '(((/[\pL.]*)*)?[a-z0-9_&=#\\/])?';
+    const PATH = '(((/[\pL\pN-._~:/?#\[\]@!$&\'()*+,;=]*) *)?[\pL\pN_&=#\\/])?';
 
     /**
      * @var string
@@ -62,6 +65,9 @@ class Autolink
      */
     protected $validURL = null;
 
+    /**
+     * Public constructor
+     */
     public function __construct()
     {
         $this->validURL = '('
@@ -73,7 +79,7 @@ class Autolink
     }
 
     /**
-     * Process string and convert all URIs to html links
+     * Process string and convert all URLs to html links
      *
      * @param string $txt
      *
@@ -81,11 +87,8 @@ class Autolink
      */
     public function autolink($txt)
     {
-        $pattern = '!' . $this->validURL . '!x';
+        $pattern = '(' . $this->validURL . ')x';
         $replacement = '<a href="$0">$0</a>';
-        //var_dump($pattern); exit();
-        //preg_match($pattern, $txt, $matches);
-        //var_dump($matches); exit();
 
         return preg_replace($pattern, $replacement, $txt);
     }
