@@ -3,7 +3,10 @@ Silex-Autolink
 
 A lightweight service provider for Silex which adds an autolink Twig extension.
 
-*This extension is currently in development! The main autolink class is not written yet and the tests are wrong. YOU HAVE BEEN WARNED.*
+Identifying URLs in strings is not easy. This is a rough and pragmatic first
+attempt. Feedback is welcome!
+
+Useful information on autolinking can be found in [this article](http://www.codinghorror.com/blog/2008/10/the-problem-with-urls.html) by Martin Fowler (also check out the numerous comments) and also in the book [Mastering Regular Expressions](http://regex.info/) by Jeffrey Friedl.
 
 Installation
 ------------
@@ -26,7 +29,7 @@ To use the service provider first register it:
 
 You can then use the autolink filter in Twig files. For example:
 
-    {{ 'http://example.com'|autolink }}
+    {{ 'Check out this site: http://example.com'|autolink }}
 
 Tests
 -----
