@@ -16,7 +16,7 @@ the following to your `composer.json` file:
 
     {
         "require": {
-            "nicl/silex-autolink": "1.0.*"
+            "nicl/silex-autolink": "2.0.*"
         }
     }
 
