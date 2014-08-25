@@ -17,8 +17,12 @@ class AutolinkServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $app)
     {
+        $app['autolink.parser'] = function () {
+            return new Autolink();
+        }
+
         $app['twig'] = $app->extend('twig', function($twig, $app) {
-            $twig->addExtension(new AutolinkTwigExtension(new Autolink()));
+            $twig->addExtension(new AutolinkTwigExtension($app['autolink.parser']));
             return $twig;
         });
     }

@@ -2,7 +2,7 @@
 
 namespace Nicl\Twig\Extension;
 
-use Nicl\Autolink;
+use Nicl\AutolinkInterface;
 
 /**
  * Twig Autolink extension
@@ -14,11 +14,11 @@ class AutolinkTwigExtension extends \Twig_Extension
     /**
      * Public constructor
      *
-     * @param Autolink $parser
+     * @param AutolinkInterface $parser
      *
      * @return AutolinkTwigExtension
      */
-    public function __construct(Autolink $parser)
+    public function __construct(AutolinkInterface $parser)
     {
         $this->parser = $parser;
     }
