@@ -2,8 +2,8 @@
 
 namespace Nicl\Silex;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Nicl\Autolink;
 use Nicl\Twig\Extension\AutolinkTwigExtension;
 
@@ -15,18 +15,15 @@ class AutolinkServiceProvider implements ServiceProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function register(Application $app)
+    public function register(Container $app)
     {
-        $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
-            $twig->addExtension(new AutolinkTwigExtension(new Autolink()));
-            return $twig;
-        }));
-    }
+        $app['autolink.parser'] = function () {
+            return new Autolink();
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function boot(Application $app)
-    {
+        $app['twig'] = $app->extend('twig', function($twig, $app) {
+            $twig->addExtension(new AutolinkTwigExtension($app['autolink.parser']));
+            return $twig;
+        });
     }
 }
