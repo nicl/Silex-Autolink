@@ -6,7 +6,7 @@ A lightweight service provider for Silex which adds an autolink Twig extension.
 Identifying URLs in strings is not easy. This is a rough and pragmatic first
 attempt. Feedback is welcome!
 
-Useful information on autolinking can be found in [this article](http://www.codinghorror.com/blog/2008/10/the-problem-with-urls.html) by Martin Fowler (also check out the numerous comments) and also in the book [Mastering Regular Expressions](http://regex.info/) by Jeffrey Friedl.
+Useful information on autolinking can be found in [this article](http://www.codinghorror.com/blog/2008/10/the-problem-with-urls.html) by Jeff Atwood (also check out the numerous comments) and also in the book [Mastering Regular Expressions](http://regex.info/) by Jeffrey Friedl.
 
 Installation
 ------------
